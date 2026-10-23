@@ -4,10 +4,10 @@ import unittest
 from pathlib import Path
 from unittest import mock
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "api"))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 os.environ.update(OPENDIAG_TOKEN="test-token", SUPABASE_URL="https://x.supabase.co",
                   SUPABASE_SERVICE_KEY="svc-key")
-import index  # noqa: E402
+import app as index  # noqa: E402
 
 GOOD = {"device_id": "PC-01", "records": [
     {"id": 1, "recorded_at": "2026-10-23T10:00:00Z", "cpu_percent": 5.0,

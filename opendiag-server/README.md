@@ -4,7 +4,7 @@ The internet-facing part of OpenDiag. It receives hardware-health reports from a
 
 Endpoints: `POST /api/v1/reports` (bearer token), `GET /api/health`.
 
-## Deploy in 4 steps
+## Deploy in 4 steps (zero-config: Vercel auto-detects the Flask `app.py`)
 
 **1. Supabase (database)**
 - Create a project at supabase.com.
@@ -20,7 +20,7 @@ Endpoints: `POST /api/v1/reports` (bearer token), `GET /api/health`.
   - `OPENDIAG_TOKEN` = a long random string (e.g. run `python -c "import secrets; print(secrets.token_urlsafe(32))"`)
   - `SUPABASE_URL` = your Project URL
   - `SUPABASE_SERVICE_KEY` = your service_role key
-- Deploy. Visit `https://YOUR-APP.vercel.app/api/health`. It should return `{"status":"ok"}`.
+- Deploy. Visit `https://YOUR-APP.vercel.app/api/health` (also `/` shows a short status line). It should return `{"status":"ok"}`.
 
 **4. Point the agent at it** (on the employee PC, `%LOCALAPPDATA%\OpenDiag\policy.json`)
 ```json
