@@ -117,5 +117,9 @@ def receive_report():
     except requests.RequestException:
         return jsonify(error="storage unavailable"), 502
     if resp.status_code >= 300:
-        return jsonify(error="storage rejected the data"), 502
+        # Only authenticated callers reach this line, so returning Supabase's message is safe
+        # and makes setup problems (missing table, wrong key) easy to diagnose.
+        detail = str(getattr(resp, "text", ""))[:300]
+        return jsonify(error="storage rejected the data",
+                       supabase_status=resp.status_code, detail=detail), 502
     return jsonify(accepted=len(payload["records"])), 201
